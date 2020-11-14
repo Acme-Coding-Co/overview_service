@@ -3,10 +3,10 @@ import React from 'react';
 const Item = ( {item} ) => (
 
   <div>
-    {console.log({item})}
-    <h3>{item.name}</h3>
-    <p>{item.description}</p>
-    <h4>${item.default_price}</h4>
+    {/* {console.log({item})} */}
+    <h2>{item.name}</h2>
+    {/* <p>{item.description}</p> */}
+    <p>${item.default_price}</p>
     <br></br>
   </div>
 

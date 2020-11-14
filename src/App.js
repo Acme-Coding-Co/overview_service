@@ -3,9 +3,10 @@ import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Container, Row, Col, Alert } from 'react-bootstrap';
+import { Navbar, Nav, Container, Row, Col, Alert, Form, FormControl, Button } from 'react-bootstrap';
 import dummyData from '../dummyData'
 import Item from './Item';
+import logo from './osirisLogo.svg';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,14 +14,21 @@ class App extends React.Component {
 
     this.state = {
       isShown: false,
-      inventory: dummyData
+      inventory: dummyData,
+      selected: dummyData[0],
+      search: ''
     }
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick() {
     this.setState({ isShown: !this.state.isShown})
+  }
+
+  handleChange(e) {
+    this.setState({ search: e.target.value}, function() {console.log(this.state.search)})
   }
 
   render() {
@@ -29,44 +37,45 @@ class App extends React.Component {
 
       <>
         <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home">Acme Coding Co.</Navbar.Brand>
+            <Navbar.Brand href="#home">
+              <img
+                src={logo}
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+                alt=""
+              />{' '}
+            Acme Clothing Co.
+            </Navbar.Brand>
+            <Nav className="mr-auto"></Nav>
+            <Form inline>
+              <FormControl type="text" placeholder="search..." className="mr-sm-2" onChange={this.handleChange} />
+              <Button variant="outline-submit">Search</Button>
+            </Form>
         </Navbar>
         <Container>
           <Row className="justify-content-md-center">
-            <Col xs lg="6">
-              <button type="button" class="btn btn-primary" onClick={() => this.handleClick()}>
-                This is a bootstrap button
-              </button>
-              {this.state.isShown ?
-                <div>
-                  <Alert variant="success">
-                    <Alert.Heading>Button success</Alert.Heading>
-                    <p>Looks like you clicked that button. Wonder what'll happen if you do it again?</p>
-                  </Alert>
-                  <div>
-                    {/* {console.log(this.state.inventory)} */}
-                    {this.state.inventory &&
-                      this.state.inventory.map( item => <Item item={item} /> )
-                    }
-                  </div>
-                </div> :
-                <Alert variant="danger">
-                  <Alert.Heading>OH NOOOOOOO</Alert.Heading>
-                </Alert>
-              }
+            <p>Welcome to the store</p>
+          </Row>
+          <Row className="justify-content-md-center">
+            <Col md="8">
+
+            </Col>
+            <Col md="4">
+              <div>
+                {this.state.inventory &&
+                  <Item item={this.state.selected} />
+                }
+              </div>
             </Col>
           </Row>
-          {/* <Row>
-            <Col><h2>1 of 2</h2></Col>
-            <Col><h2>2 of 2</h2></Col>
+          <Row className="justify-content-lg-center">
+            <Col lg="10">
+              <p>{this.state.selected.description}</p>
+              {console.log(this.state.selected.description)}
+            </Col>
           </Row>
-          <Row>
-            <Col><h2>1 of 3</h2></Col>
-            <Col><h2>2 of 3</h2></Col>
-            <Col><h2>3 of 3</h2></Col>
-          </Row> */}
         </Container>
-
       </>
     );
   }
