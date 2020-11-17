@@ -3,10 +3,10 @@ import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Nav, Container, Row, Col, Alert, Form, FormControl, Button } from 'react-bootstrap';
 import dummyData from '../dummyData'
 import Item from './Item';
-import logo from './osirisLogo.svg';
+import logo from './Acme-Logo-01.png';
+import background from './clothes-rack.jpg';
 
 class App extends React.Component {
   constructor(props) {
@@ -36,46 +36,69 @@ class App extends React.Component {
     return (
 
       <>
-        <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home">
-              <img
-                src={logo}
-                width="30"
-                height="30"
-                className="d-inline-block align-top"
-                alt=""
-              />{' '}
-            Acme Clothing Co.
-            </Navbar.Brand>
-            <Nav className="mr-auto"></Nav>
-            <Form inline>
-              <FormControl type="text" placeholder="search..." className="mr-sm-2" onChange={this.handleChange} />
-              <Button variant="outline-submit">Search</Button>
-            </Form>
-        </Navbar>
-        <Container>
-          <Row className="justify-content-md-center">
-            <p>Welcome to the store</p>
-          </Row>
-          <Row className="justify-content-md-center">
-            <Col md="8">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{ backgroundImage: `url(${background})`, backgroundPosition: 'center right' }}>
+          <div className="container">
+            <a className="navbar-brand" href="#"><img width="80px" height="36px" src={logo}></img></a>
 
-            </Col>
-            <Col md="4">
-              <div>
-                {this.state.inventory &&
-                  <Item item={this.state.selected} />
-                }
-              </div>
-            </Col>
-          </Row>
-          <Row className="justify-content-lg-center">
-            <Col lg="10">
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-collapse">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+
+            <div className="collapse in navbar-collapse justify-content-between" id="nav-collapse">
+              <ul className="navbar-nav">
+                <li className="nav-item active">
+                  <a href="" className="nav-link">Home</a>
+                </li>
+                <li className="nav-item">
+                  <a href="" className="nav-link">Men</a>
+                </li>
+                <li className="nav-item">
+                  <a href="" className="nav-link">Women</a>
+                </li>
+                <li className="nav-item">
+                  <a href="" className="nav-link">Youth</a>
+                </li>
+              </ul>
+
+              <form className="form-inline mx-1">
+                <input type="search" className="form-control mr-sm-2" placeholder="Search" onChange={this.handleChange}/>
+                <button className="btn btn-outline-light"><i class="fas fa-search"></i></button>
+              </form>
+
+            </div>
+          </div>
+        </nav>
+
+        <div className="container">
+          <div className="text-center block my-3" id="banner"><h5>ANNOUNCEMENTS</h5></div>
+        </div>
+
+
+        <div className="container border rounded">
+          <div className="row justify-content-center">
+            <div className="col-8">
+              <p className="display-4">MAIN PIC</p>
+            </div>
+            <div className="col-4">
+              {this.state.inventory &&
+                <Item item={this.state.selected} />
+              }
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-8">
               <p>{this.state.selected.description}</p>
-              {console.log(this.state.selected.description)}
-            </Col>
-          </Row>
-        </Container>
+              {/* {console.log(this.state.selected.description)} */}
+            </div>
+          </div>
+        </div>
+
+        <style>
+          #navbar {
+
+
+          }
+        </style>
       </>
     );
   }
