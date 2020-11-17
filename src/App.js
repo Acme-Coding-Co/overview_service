@@ -92,13 +92,6 @@ class App extends React.Component {
             </div>
           </div>
         </div>
-
-        <style>
-          #navbar {
-
-
-          }
-        </style>
       </>
     );
   }
