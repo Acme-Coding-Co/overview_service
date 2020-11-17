@@ -75,23 +75,9 @@ class App extends React.Component {
 
 
         <div className="container border rounded">
-          <div className="row justify-content-center">
-            <div className="col-8">
-              <img src="https://i1.adis.ws/i/boohooamplience/mzz12456_grey_xl?$product_image_main_mobile$"></img>
-            </div>
-            <div className="col-4">
-              {this.state.inventory &&
-                <Item item={this.state.selected} />
-              }
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-8">
-              <p>{this.state.selected.description}</p>
-              {/* {console.log(this.state.selected.description)} */}
-            </div>
-          </div>
+          <Item item={this.state.selected} />
         </div>
+        
       </>
     );
   }
