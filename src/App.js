@@ -4,7 +4,7 @@ import { hot } from 'react-hot-loader/root';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import dummyData from '../dummyData'
-import Item from './Item';
+import ProductInfo from './ProductInfo';
 import logo from './Acme-Logo-01.png';
 import background from './clothes-rack.jpg';
 
@@ -79,7 +79,37 @@ class App extends React.Component {
 
 
         <div className="container border rounded">
-          <Item item={this.state.selected} />
+          <div className="row">
+            <div className="col-md-8 border  border-primary">img gallery</div>
+            <div className="col-md-4 border border-primary">
+              <div className="row border border-warning">rating
+              </div>
+              <div className="row border border-warning d-flex flex-column">
+                <ProductInfo item={this.state.selected} />
+              </div>
+              <div className="row border border-warning">style select
+              </div>
+              <div className="row border border-warning">
+                <div className="btn btn-outline-dark col-md-9">size select</div>
+                <div className="btn btn-outline-dark col-md-3">qty</div>
+                <div className="btn btn-outline-dark col-md-10">add to bag</div>
+                <div className="btn btn-outline-dark col-md-2">{/* make this conditional depending on whether it's been saved - filled/not filled*/}<i class="far fa-heart"></i></div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-9 border-right border-danger">
+            <h5>Product Slogan</h5>
+            <br/>
+            <p>Product Description</p>
+            </div>
+            <div className="col-lg-3 d-flex flex-column justify-content-center">
+              <li>item</li>
+              <li>item</li>
+              <li>item</li>
+              <li>item</li>
+            </div>
+          </div>
         </div>
 
       </>
