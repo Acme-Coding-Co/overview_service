@@ -5,7 +5,7 @@ const Item = ( {item} ) => (
   <div>
     <div className="row justify-content-center">
       <div className="col-8">
-        <img src="https://i1.adis.ws/i/boohooamplience/mzz12456_grey_xl?$product_image_main_mobile$"
+        <img className="img-fluid" src="https://i1.adis.ws/i/boohooamplience/mzz12456_grey_xl?$product_image_main_mobile$"
         style={{ height: '50%'}}>
         </img>
       </div>

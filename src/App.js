@@ -38,7 +38,7 @@ class App extends React.Component {
       <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{ backgroundImage: `url(${background})`, backgroundPosition: 'center right' }}>
           <div className="container">
-            <a className="navbar-brand" href="#"><img width="80px" height="36px" src={logo}></img></a>
+            <a className="navbar-brand mb-1 pb-2" href="#"><img width="80px" height="36px" src={logo}></img></a>
 
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-collapse">
               <span className="navbar-toggler-icon"></span>
@@ -60,9 +60,13 @@ class App extends React.Component {
                 </li>
               </ul>
 
-              <form className="form-inline mx-1">
-                <input type="search" className="form-control mr-sm-2" placeholder="Search" onChange={this.handleChange}/>
-                <button className="btn btn-outline-light"><i class="fas fa-search"></i></button>
+              <form className="form-inline">
+                <div className="input-group">
+                  <input type="search" className="form-control" placeholder="Search..." onChange={this.handleChange}/>
+                  <div className="input-group-append">
+                    <button className="btn btn-warning" id="search-btn" type="button" style={{ backgroundColor: '#F0A500' }} ><i class="fas fa-search"></i></button>
+                  </div>
+                </div>
               </form>
 
             </div>
@@ -77,7 +81,7 @@ class App extends React.Component {
         <div className="container border rounded">
           <Item item={this.state.selected} />
         </div>
-        
+
       </>
     );
   }
