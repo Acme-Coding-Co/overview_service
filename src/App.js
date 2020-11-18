@@ -5,6 +5,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import dummyData from '../dummyData'
 import ProductInfo from './ProductInfo';
+import ProductDescription from './ProductDescription';
 import logo from './Acme-Logo-01.png';
 import background from './clothes-rack.jpg';
 
@@ -99,9 +100,7 @@ class App extends React.Component {
           </div>
           <div className="row">
             <div className="col-lg-9 border-right border-danger">
-            <h5>Product Slogan</h5>
-            <br/>
-            <p>Product Description</p>
+              <ProductDescription item={this.state.selected} />
             </div>
             <div className="col-lg-3 d-flex flex-column justify-content-center">
               <li>item</li>
