@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import dummyData from '../dummyData'
 import ProductInfo from './ProductInfo';
 import ProductDescription from './ProductDescription';
+import Gallery from './Gallery';
 import logo from './Acme-Logo-01.png';
 import background from './clothes-rack.jpg';
 
@@ -16,8 +17,8 @@ class App extends React.Component {
 
     this.state = {
       isShown: false,
-      inventory: dummyData,
-      selected: undefined,
+      inventory: undefined,
+      defaultItem: undefined,
       search: ''
     }
 
@@ -26,8 +27,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://52.26.193.201:3000/products/list')
-      .then(res => {this.setState({inventory: res.data}), function() {console.log(this.state.inventory)}})
+    axios.get('http://52.26.193.201:3000/products/list/?count=9')
+      .then(res => {this.setState({ inventory: res.data })})
+      // .then(res => {this.setState({ defaultItem: this.state.inventory[4] })})
   }
 
   handleClick() {
@@ -43,7 +45,7 @@ class App extends React.Component {
     return (
 
       <>
-        {console.log(this.state.inventory)}
+        {console.log('default:', this.state.defaultItem)}
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{ backgroundImage: `url(${background})`, backgroundPosition: 'center right' }}>
           <div className="container">
             <a className="navbar-brand mb-1 pb-2" href="#"><img width="80px" height="36px" src={logo}></img></a>
@@ -87,13 +89,17 @@ class App extends React.Component {
 
         <div className="container">
           <div className="row">
-            <div className="col-md-7 bg-light">img gallery</div>
+            <div className="col-md-7 bg-light">
+              {this.state.inventory &&
+                <Gallery item={this.state.inventory[7]} />
+              }
+            </div>
             <div className="col-md-4 ml-auto">
               <div className="row border border-warning">rating
               </div>
               <div className="row d-flex flex-column">
                 {this.state.inventory &&
-                  <ProductInfo item={this.state.inventory[4]} />
+                  <ProductInfo item={this.state.inventory[7]} />
                 }
               </div>
               <div className="row border border-success">style select
@@ -121,7 +127,7 @@ class App extends React.Component {
           <div className="row mt-3">
             <div className="col-lg-7">
               {this.state.inventory &&
-                <ProductDescription item={this.state.inventory[4]} />
+                <ProductDescription item={this.state.inventory[7]} />
               }
             </div>
             {/* <div className="col-lg-3 d-flex flex-column justify-content-center">
