@@ -4,8 +4,8 @@ const ProductInfo = ( {item} ) => (
 
   <div>
     {console.log({item})}
-    <p className="text-muted">{item.category}</p>
-    <h3>{item.name}</h3>
+    <small className="text-muted">{item.category}</small>
+    <p className="h3">{item.name}</p>
     <p>${item.default_price}</p>
   </div>
 

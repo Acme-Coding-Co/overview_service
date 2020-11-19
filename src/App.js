@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
+import axios from 'axios';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import dummyData from '../dummyData'
@@ -16,12 +17,17 @@ class App extends React.Component {
     this.state = {
       isShown: false,
       inventory: dummyData,
-      selected: dummyData[0],
+      selected: undefined,
       search: ''
     }
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('http://52.26.193.201:3000/products/list')
+      .then(res => {this.setState({inventory: res.data}), function() {console.log(this.state.inventory)}})
   }
 
   handleClick() {
@@ -37,6 +43,7 @@ class App extends React.Component {
     return (
 
       <>
+        {console.log(this.state.inventory)}
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{ backgroundImage: `url(${background})`, backgroundPosition: 'center right' }}>
           <div className="container">
             <a className="navbar-brand mb-1 pb-2" href="#"><img width="80px" height="36px" src={logo}></img></a>
@@ -78,36 +85,51 @@ class App extends React.Component {
           <div className="text-center block my-3" id="banner"><h5>ANNOUNCEMENTS</h5></div>
         </div>
 
-
-        <div className="container border rounded">
+        <div className="container">
           <div className="row">
-            <div className="col-md-8 border  border-primary">img gallery</div>
-            <div className="col-md-4 border border-primary">
+            <div className="col-md-7 bg-light">img gallery</div>
+            <div className="col-md-4 ml-auto">
               <div className="row border border-warning">rating
               </div>
-              <div className="row border border-warning d-flex flex-column">
-                <ProductInfo item={this.state.selected} />
+              <div className="row d-flex flex-column">
+                {this.state.inventory &&
+                  <ProductInfo item={this.state.inventory[4]} />
+                }
               </div>
-              <div className="row border border-warning">style select
+              <div className="row border border-success">style select
               </div>
-              <div className="row border border-warning">
-                <div className="btn btn-outline-dark col-md-9">size select</div>
-                <div className="btn btn-outline-dark col-md-3">qty</div>
-                <div className="btn btn-outline-dark col-md-10">add to bag</div>
-                <div className="btn btn-outline-dark col-md-2">{/* make this conditional depending on whether it's been saved - filled/not filled*/}<i class="far fa-heart"></i></div>
+              <div className="row mt-2 form-group">
+                <select className="form-control mb-2">
+                  <option value="" disabled selected hidden>Select Size</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                </select>
+                <select className="form-control mb-2">
+                  <option value="" disabled selected hidden>Qty</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+                <button className="btn btn-warning form-control col-md-9 mb-2" type="submit">Add To Bag</button>
+                <div className="btn btn-warning form-control col-md-2 ml-md-auto">{/* make this conditional depending on whether it's been saved - filled/not filled*/}<i class="far fa-heart"></i></div>
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-lg-9 border-right border-danger">
-              <ProductDescription item={this.state.selected} />
+          <div className="row mt-3">
+            <div className="col-lg-7">
+              {this.state.inventory &&
+                <ProductDescription item={this.state.inventory[4]} />
+              }
             </div>
-            <div className="col-lg-3 d-flex flex-column justify-content-center">
+            {/* <div className="col-lg-3 d-flex flex-column justify-content-center">
               <li>item</li>
               <li>item</li>
               <li>item</li>
               <li>item</li>
-            </div>
+            </div> */}
           </div>
         </div>
 
