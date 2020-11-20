@@ -2,7 +2,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
-import { ProductInfo, ProductDesc, Gallery, StyleSelect, Rating } from './components/index';
+import { Navbar, Product, Details, Desc, Gallery, StyleSelect, Rating } from './components/index';
 import logo from './images/acme_logo.png';
 import background from './images/clothes_rack.jpg';
 
@@ -14,6 +14,7 @@ class App extends React.Component {
       isShown: false,
       inventory: undefined,
       currentItem: undefined,
+      currentStyles: undefined,
       search: ''
     }
 
@@ -27,7 +28,7 @@ class App extends React.Component {
       .then(res => {
         return axios.get(`http://52.26.193.201:3000/products/${this.state.currentItem.id}/styles`)
       })
-      .then(res => this.setState({ imgUrl: res.data.results[0].photos[0].url}))
+      .then(res => this.setState({ currentStyles: res.data, imgUrl: res.data.results[0].photos[0].url}))
   }
 
   handleSearchSubmit() {
@@ -39,7 +40,7 @@ class App extends React.Component {
       if (itemName.includes(query)) {
         this.setState({ currentItem: item })
         axios.get(`http://52.26.193.201:3000/products/${item.id}/styles`)
-          .then(res => this.setState({ imgUrl: res.data.results[0].photos[0].url }))
+          .then(res => this.setState({ currentStyles: res.data, imgUrl: res.data.results[0].photos[0].url }))
       }
     })
 
@@ -53,6 +54,7 @@ class App extends React.Component {
 
     const inventory = this.state.inventory;
     const currentItem = this.state.currentItem;
+    const currentStyles = this.state.currentStyles;
     const imgUrl = this.state.imgUrl;
 
     return (
@@ -60,53 +62,11 @@ class App extends React.Component {
       <>
 
         {/* {console.log('inventory:', inventory)} */}
-        {/* {console.log('default:', defaultItem)} */}
+        {/* {console.log('current:', currentItem)} */}
         {/* {console.log('selected:', selected)} */}
 
         {/* NAVBAR */}
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{ backgroundImage: `url(${background})`, backgroundPosition: 'center right' }}>
-
-          <div className="container">
-
-            {/* LOGO */}
-            <a className="navbar-brand mb-1 pb-2" href="#"><img width="80px" height="36px" src={logo}></img></a>
-
-            {/* TOGGLER */}
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-collapse">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-
-            <div className="collapse in navbar-collapse justify-content-between" id="nav-collapse">
-
-              {/* LINKS */}
-              <ul className="navbar-nav">
-                <li className="nav-item active">
-                  <a href="" className="nav-link">Home</a>
-                </li>
-                <li className="nav-item">
-                  <a href="" className="nav-link">Men</a>
-                </li>
-                <li className="nav-item">
-                  <a href="" className="nav-link">Women</a>
-                </li>
-                <li className="nav-item">
-                  <a href="" className="nav-link">Youth</a>
-                </li>
-              </ul>
-
-              {/* SEARCH */}
-              <form className="form-inline">
-                <div className="input-group">
-                  <input type="search" className="form-control" placeholder="Search..." onChange={this.handleChange}/>
-                  <div className="input-group-append">
-                    <button className="btn btn-warning" id="search-btn" type="button" style={{ backgroundColor: '#F0A500' }} ><i class="fas fa-search" onClick={() => this.handleSearchSubmit()}></i></button>
-                  </div>
-                </div>
-              </form>
-
-            </div>
-          </div>
-        </nav>
+        <Navbar bg={background} logo={logo} handleChange={this.handleChange} handleSearchSubmit={this.handleSearchSubmi} />
 
         {/* BANNER */}
         <marquee className="mt-3" behavior="scroll-text" direction="left"><p>|| <strong>SALE</strong> on all out-of-style footwear and accessories || get last year's style at next year's prices ||</p></marquee>
@@ -143,7 +103,7 @@ class App extends React.Component {
               {/* PRODUCT DETAILS */}
               <div className="row d-flex flex-column">
                 {inventory ?
-                  <ProductInfo item={currentItem} /> :
+                  <Details item={currentItem} /> :
                   <div>nothing here</div>
                 }
                 {/* {selected ?
@@ -153,9 +113,9 @@ class App extends React.Component {
               </div>
 
               {/* STYLE SELECTOR */}
-              <div className="row border border-success">
-                <StyleSelect />
-              </div>
+                <div className="row">
+                  <StyleSelect styles={currentStyles} />
+                </div>
 
               {/* BUTTON GROUP */}
               <div className="row mt-2 form-group">
@@ -194,7 +154,7 @@ class App extends React.Component {
 
               {/* PRODUCT DESCRIPTION */}
               {inventory ?
-                <ProductDesc item={currentItem} /> :
+                <Desc item={currentItem} /> :
                 <div>nothing here</div>
               }
 

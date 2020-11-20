@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductInfo = ( {item} ) => (
+const Details = ( {item} ) => (
 
   <div>
     {/* {console.log({item})} */}
@@ -11,4 +11,4 @@ const ProductInfo = ( {item} ) => (
 
 );
 
-export default ProductInfo;
+export default Details;
