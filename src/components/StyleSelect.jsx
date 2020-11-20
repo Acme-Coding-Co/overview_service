@@ -3,7 +3,7 @@ import React from 'react';
 const StyleSelect = (props) => (
 
   <div>
-    STYLE SELECTION
+    STYLE SELECTION COMPONENT
   </div>
 )
 

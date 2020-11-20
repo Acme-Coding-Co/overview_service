@@ -2,7 +2,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
-import { ProductInfo, ProductDesc, Gallery, StyleSelect } from './components/index';
+import { ProductInfo, ProductDesc, Gallery, StyleSelect, Rating } from './components/index';
 import logo from './images/acme_logo.png';
 import background from './images/clothes_rack.jpg';
 
@@ -109,8 +109,10 @@ class App extends React.Component {
         </nav>
 
         {/* BANNER */}
+        <marquee className="mt-3" behavior="scroll-text" direction="left"><p>|| <strong>SALE</strong> on all out-of-style footwear and accessories || get last year's style at next year's prices ||</p></marquee>
+
         <div className="container">
-          <div className="text-center block my-3" id="banner"><h5>ANNOUNCEMENTS</h5></div>
+          {/* <div className="text-center block my-3" id="banner"><h5>ANNOUNCEMENTS</h5></div> */}
         </div>
 
         {/* OVERVIEW MODULE STARTS HERE */}
@@ -134,7 +136,9 @@ class App extends React.Component {
             <div className="col-md-4 ml-auto">
 
               {/* RATING */}
-              <div className="row border border-warning">RATING COMPONENT</div>
+              <div className="row border border-warning">
+                <Rating />
+              </div>
 
               {/* PRODUCT DETAILS */}
               <div className="row d-flex flex-column">
