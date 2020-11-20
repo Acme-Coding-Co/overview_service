@@ -92,8 +92,8 @@ class App extends React.Component {
             <div className="col-md-4 ml-auto">
 
               {/* RATING */}
-              <div className="row border border-warning">
-                <Rating />
+              <div className="row">
+                <Rating rating=''/>
               </div>
 
               {/* PRODUCT DETAILS */}
