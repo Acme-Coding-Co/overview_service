@@ -66,7 +66,7 @@ class App extends React.Component {
         {/* {console.log('selected:', selected)} */}
 
         {/* NAVBAR */}
-        <Navbar bg={background} logo={logo} handleChange={this.handleChange} handleSearchSubmit={this.handleSearchSubmi} />
+        <Navbar bg={background} logo={logo} handleChange={this.handleChange} handleSearchSubmit={this.handleSearchSubmit} />
 
         {/* BANNER */}
         <marquee className="mt-3" behavior="scroll-text" direction="left"><p>|| <strong>SALE</strong> on all out-of-style footwear and accessories || get last year's style at next year's prices ||</p></marquee>
