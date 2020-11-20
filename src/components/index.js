@@ -5,3 +5,4 @@ export {default as Rating} from './Rating';
 export {default as StyleSelect} from './StyleSelect';
 export {default as Product} from './Product';
 export {default as Navbar} from './Navbar';
+export {default as Banner} from './Banner';

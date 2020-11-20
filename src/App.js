@@ -2,7 +2,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
-import { Navbar, Product, Details, Desc, Gallery, StyleSelect, Rating } from './components/index';
+import { Navbar, Banner, Product, Details, Desc, Gallery, StyleSelect, Rating } from './components/index';
 import logo from './images/acme_logo.png';
 import background from './images/clothes_rack.jpg';
 
@@ -69,11 +69,7 @@ class App extends React.Component {
         <Navbar bg={background} logo={logo} handleChange={this.handleChange} handleSearchSubmit={this.handleSearchSubmit} />
 
         {/* BANNER */}
-        <marquee className="mt-3" behavior="scroll-text" direction="left"><p>|| <strong>SALE</strong> on all out-of-style footwear and accessories || get last year's style at next year's prices ||</p></marquee>
-
-        <div className="container">
-          {/* <div className="text-center block my-3" id="banner"><h5>ANNOUNCEMENTS</h5></div> */}
-        </div>
+        <Banner />
 
         {/* OVERVIEW MODULE STARTS HERE */}
         <div className="container">
