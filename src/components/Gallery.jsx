@@ -20,7 +20,7 @@ class Gallery extends React.Component {
         {/* {console.log(this.props)} */}
         <div className="row" id="gallery" data-toggle="modal" data-target="#photoModal">
           <div className="col-12">
-            <img className="img-fluid shadow-lg" src={imgUrl} alt="product photo" data-target="#photoCarousel" data-slide-to="0"/>
+            <img className="img-fluid shadow-lg" src={imgUrl} alt="product photo" style={{ 'maxHeight': '550px'}} data-target="#photoCarousel" data-slide-to="0"/>
           </div>
         </div>
 
