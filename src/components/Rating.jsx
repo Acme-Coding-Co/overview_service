@@ -8,6 +8,7 @@ const Rating = (props) => (
         rating={2.403}
         starDimension="18px"
         starSpacing="1px"
+        starRatedColor="#f0ad4e"
       />
     </div>
 
