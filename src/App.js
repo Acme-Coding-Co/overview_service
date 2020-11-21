@@ -2,7 +2,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
-import { Navbar, Banner, Product, Details, Desc, Gallery, StyleSelect, Rating } from './components/index';
+import { Navbar, Banner, Product, Details, Desc, Gallery, StyleSelect, Rating, ButtonGroup, Sharing } from './components/index';
 import logo from './images/acme_logo.png';
 import background from './images/clothes_rack.jpg';
 
@@ -77,109 +77,63 @@ class App extends React.Component {
           {/* TOP ROW */}
           <div className="row">
 
-            {/* LEFT COL */}
-            <div className="col-md-7 bg-light">
-
+            {/* TOP-LEFT COL */}
+            <div className="col-md-7 d-flex flex-column justify-content-center">
               {/* GALLERY */}
-                {inventory ?
-                  <Gallery imgUrl={imgUrl} /> :
-                  <div>nothing here</div>
-                }
-
-              </div>
-
-            {/* RIGHT COL */}
-            <div className="col-md-4 ml-auto">
-
-              {/* RATING */}
-              <div className="row">
-                <Rating rating=''/>
-              </div>
-
-              {/* PRODUCT DETAILS */}
-              <div className="row d-flex flex-column">
-                {inventory ?
-                  <Details item={currentItem} /> :
-                  <div>nothing here</div>
-                }
-                {/* {selected ?
-                  <ProductInfo item={selected} /> :
-                  <ProductInfo item={defaultItem} />
-                } */}
-              </div>
-
-              {/* STYLE SELECTOR */}
-                <div className="row">
-                  <StyleSelect styles={currentStyles} />
-                </div>
-
-              {/* BUTTON GROUP */}
-              <div className="row mt-2 form-group">
-
-                {/* SIZES*/}
-                <select className="form-control mb-2">
-                  <option value="" disabled selected hidden>Select Size</option>
-                  <option value="S">S</option>
-                  <option value="M">M</option>
-                  <option value="L">L</option>
-                  <option value="XL">XL</option>
-                </select>
-
-                {/* QTY */}
-                <select className="form-control mb-2">
-                  <option value="" disabled selected hidden>Qty</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </select>
-
-                {/* CART/SAVE */}
-                <button className="btn btn-warning form-control col-md-9 mb-2  shadow-lg" type="submit">Add To Bag</button>
-                <div className="btn btn-warning form-control col-md-2 ml-md-auto shadow-lg">{/* make this conditional depending on whether it's been saved - filled/not filled*/}<i class="far fa-heart"></i></div>
-
-                </div>
-              </div>
+              {inventory ?
+                <Gallery imgUrl={imgUrl} /> :
+                <div>nothing here</div>
+              }
             </div>
 
-          {/* BOTTOM ROW */}
-          <div className="row mt-3">
+            {/* TOP-RT COL */}
+            <div className="col-md-5">
 
-            {/* LEFT COL */}
-            <div className="col-lg-7">
-
-              {/* PRODUCT DESCRIPTION */}
+              {/* PRODUCT DETAILS */}
               {inventory ?
-                <Desc item={currentItem} /> :
+                <Details item={currentItem} /> :
                 <div>nothing here</div>
               }
 
-            </div>
+              {/* RATING */}
+              <div className="row ml-1 mb-3">
+                <Rating rating=''/>
+              </div>
 
-            {/* RIGHT COL */}
-            <div className="col-lg-4 ml-auto justify-content-center">
+              {/* STYLE SELECTOR */}
+              <div className="row">
+                <StyleSelect styles={currentStyles} />
+              </div>
 
-              {/* SHARING LINKS */}
-              Share to
-              <ul>
-                <li>
-                  <button className="btn btn-sm btn-primary mb-2"><i class="fab fa-facebook"></i></button>
-                </li>
-                <li>
-                  <button className="btn btn-sm btn-warning mb-2"><i class="fab fa-twitter"></i></button>
-                </li>
-                <li>
-                  <button className="btn btn-sm btn-danger mb-2"><i class="fab fa-instagram"></i></button>
-                </li>
-                <li>
-                  <button className="btn btn-sm btn-info">email</button>
-                </li>
-              </ul>
+              {/* BUTTON GROUP */}
+              <ButtonGroup />
 
             </div>
+
           </div>
-        </div>
 
+          {/* BOTTOM ROW */}
+          <div className="row mt-2">
+
+              {/* BOT-LEFT COL */}
+              <div className="col-md-7">
+                {/* PRODUCT DESCRIPTION */}
+                {inventory ?
+                  <Desc item={currentItem} /> :
+                  <div>nothing here</div>
+                }
+              </div>
+
+              {/* BOT-RT COL */}
+              <div className="col-md-5">
+                {/* SHARING LINKS */}
+                <Sharing />
+              </div>
+
+          </div>
+
+        {/* END OF CONTAINER */}
+        </div>
       </>
     );
   }

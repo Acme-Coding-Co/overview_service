@@ -6,3 +6,5 @@ export {default as StyleSelect} from './StyleSelect';
 export {default as Product} from './Product';
 export {default as Navbar} from './Navbar';
 export {default as Banner} from './Banner';
+export {default as ButtonGroup} from './ButtonGroup';
+export {default as Sharing} from './Sharing';
