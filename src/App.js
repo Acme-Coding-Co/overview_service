@@ -2,7 +2,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
-import { Navbar, Banner, Product, Details, Desc, Gallery, StyleSelect, Rating, ButtonGroup, Sharing } from './components/index';
+import { Navbar, Banner, Overview } from './components/index';
 import logo from './images/acme_logo.png';
 import background from './images/clothes_rack.jpg';
 
@@ -11,10 +11,10 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      isShown: false,
       inventory: undefined,
       currentItem: undefined,
       currentStyles: undefined,
+      ratings: undefined,
       search: ''
     }
 
@@ -24,11 +24,15 @@ class App extends React.Component {
 
   componentDidMount() {
     axios.get('http://52.26.193.201:3000/products/list/?count=10')
-      .then(res => this.setState({ inventory: res.data, currentItem: res.data[7] }))
+      .then(res => this.setState({ inventory: res.data, currentItem: res.data[4] }))
       .then(res => {
         return axios.get(`http://52.26.193.201:3000/products/${this.state.currentItem.id}/styles`)
       })
-      .then(res => this.setState({ currentStyles: res.data, imgUrl: res.data.results[0].photos[0].url}))
+      .then(res => this.setState({ currentStyles: res.data, imgUrl: res.data.results[0].photos[0].url }))
+      .then(res => {
+        return axios.get(`http://52.26.193.201:3000/reviews/${this.state.currentItem.id}/meta`)
+      })
+      .then(res => this.setState({ ratings: res.data.ratings }))
   }
 
   handleSearchSubmit() {
@@ -41,9 +45,16 @@ class App extends React.Component {
         this.setState({ currentItem: item })
         axios.get(`http://52.26.193.201:3000/products/${item.id}/styles`)
           .then(res => this.setState({ currentStyles: res.data, imgUrl: res.data.results[0].photos[0].url }))
+          .then(res => {
+            return axios.get(`http://52.26.193.201:3000/reviews/${item.id}/meta`)
+          })
+          .then(res => {
+            for (let score in res.data.ratings) {
+              console.log(score)
+            }
+          })
       }
     })
-
   }
 
   handleChange(e) {
@@ -56,14 +67,11 @@ class App extends React.Component {
     const currentItem = this.state.currentItem;
     const currentStyles = this.state.currentStyles;
     const imgUrl = this.state.imgUrl;
+    const ratings = this.state.ratings;
 
     return (
 
       <>
-
-        {/* {console.log('inventory:', inventory)} */}
-        {/* {console.log('current:', currentItem)} */}
-        {/* {console.log('selected:', selected)} */}
 
         {/* NAVBAR */}
         <Navbar bg={background} logo={logo} handleChange={this.handleChange} handleSearchSubmit={this.handleSearchSubmit} />
@@ -71,69 +79,9 @@ class App extends React.Component {
         {/* BANNER */}
         <Banner />
 
-        {/* OVERVIEW MODULE STARTS HERE */}
-        <div className="container">
+        {/* OVERVIEW MODULE */}
+        <Overview inventory={inventory} currentItem={currentItem} currentStyles={currentStyles} imgUrl={imgUrl} ratings={ratings} />
 
-          {/* TOP ROW */}
-          <div className="row">
-
-            {/* TOP-LEFT COL */}
-            <div className="col-md-7 d-flex flex-column justify-content-center">
-              {/* GALLERY */}
-              {inventory ?
-                <Gallery imgUrl={imgUrl} /> :
-                <div>nothing here</div>
-              }
-            </div>
-
-            {/* TOP-RT COL */}
-            <div className="col-md-5">
-
-              {/* PRODUCT DETAILS */}
-              {inventory ?
-                <Details item={currentItem} /> :
-                <div>nothing here</div>
-              }
-
-              {/* RATING */}
-              <div className="row ml-1 mb-3">
-                <Rating rating=''/>
-              </div>
-
-              {/* STYLE SELECTOR */}
-              <div className="row">
-                <StyleSelect styles={currentStyles} />
-              </div>
-
-              {/* BUTTON GROUP */}
-              <ButtonGroup />
-
-            </div>
-
-          </div>
-
-          {/* BOTTOM ROW */}
-          <div className="row mt-2">
-
-              {/* BOT-LEFT COL */}
-              <div className="col-md-7">
-                {/* PRODUCT DESCRIPTION */}
-                {inventory ?
-                  <Desc item={currentItem} /> :
-                  <div>nothing here</div>
-                }
-              </div>
-
-              {/* BOT-RT COL */}
-              <div className="col-md-5">
-                {/* SHARING LINKS */}
-                <Sharing />
-              </div>
-
-          </div>
-
-        {/* END OF CONTAINER */}
-        </div>
       </>
     );
   }

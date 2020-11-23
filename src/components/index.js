@@ -8,3 +8,4 @@ export {default as Navbar} from './Navbar';
 export {default as Banner} from './Banner';
 export {default as ButtonGroup} from './ButtonGroup';
 export {default as Sharing} from './Sharing';
+export {default as Overview} from './Overview';
