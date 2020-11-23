@@ -12,11 +12,13 @@ const Overview = ({ inventory, currentItem, currentStyles, imgUrl, ratings }) =>
 
         {/* TOP-LEFT COL */}
         <div className="col-md-7 d-flex flex-column justify-content-center">
+
           {/* GALLERY */}
           {inventory ?
             <Gallery imgUrl={imgUrl} /> :
             <div>nothing here</div>
           }
+          
         </div>
 
         {/* TOP-RT COL */}
@@ -50,17 +52,21 @@ const Overview = ({ inventory, currentItem, currentStyles, imgUrl, ratings }) =>
 
           {/* BOT-LEFT COL */}
           <div className="col-md-7">
+
             {/* PRODUCT DESCRIPTION */}
             {inventory ?
               <Desc item={currentItem} /> :
               <div>nothing here</div>
             }
+
           </div>
 
           {/* BOT-RT COL */}
           <div className="col-md-5">
+
             {/* SHARING LINKS */}
             <Sharing />
+
           </div>
 
       </div>

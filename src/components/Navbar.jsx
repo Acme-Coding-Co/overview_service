@@ -2,7 +2,6 @@ import React from 'react';
 
 const Navbar = ({ bg, logo, handleChange, handleSearchSubmit }) => (
 
-
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark img-fluid" style={{ backgroundImage: `url(${bg})`, backgroundPosition: 'center right', width: '100%' }}>
 
     <div className="container">
