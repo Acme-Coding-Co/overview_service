@@ -5,8 +5,7 @@ import getScore from './getScore'
 const Rating = ({ ratings }) => (
 
     <div>
-      {/* {console.log({ ratings })} */}
-      {/* {console.log(getScore({ratings}))} */}
+
       {getScore({ratings}) ?
         <StarRatings
           rating={getScore({ratings})}
@@ -21,8 +20,8 @@ const Rating = ({ ratings }) => (
           starRatedColor="#f0ad4e"
         />
       }
-    </div>
 
+    </div>
 );
 
 

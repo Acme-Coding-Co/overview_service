@@ -10,13 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      inventory: undefined,
-      currentItem: undefined,
-      currentStyles: undefined,
-      ratings: undefined,
-      search: ''
-    }
+    this.state = {}
 
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -28,7 +22,7 @@ class App extends React.Component {
       .then(res => {
         return axios.get(`http://52.26.193.201:3000/products/${this.state.currentItem.id}/styles`)
       })
-      .then(res => this.setState({ currentStyles: res.data, imgUrl: res.data.results[0].photos[0].url }))
+      .then(res => this.setState({ currentStyles: res.data, galleryImgs: res.data.results[0].photos }))
       .then(res => {
         return axios.get(`http://52.26.193.201:3000/reviews/${this.state.currentItem.id}/meta`)
       })
@@ -44,7 +38,7 @@ class App extends React.Component {
       if (itemName.includes(query)) {
         this.setState({ currentItem: item })
         axios.get(`http://52.26.193.201:3000/products/${item.id}/styles`)
-          .then(res => this.setState({ currentStyles: res.data, imgUrl: res.data.results[0].photos[0].url }))
+          .then(res => this.setState({ currentStyles: res.data, galleryImgs: res.data.results[0].photos }))
           .then(res => {
             return axios.get(`http://52.26.193.201:3000/reviews/${item.id}/meta`)
           })
@@ -63,7 +57,7 @@ class App extends React.Component {
     const inventory = this.state.inventory;
     const currentItem = this.state.currentItem;
     const currentStyles = this.state.currentStyles;
-    const imgUrl = this.state.imgUrl;
+    const galleryImgs = this.state.galleryImgs;
     const ratings = this.state.ratings;
 
     return (
@@ -77,7 +71,12 @@ class App extends React.Component {
         <Banner />
 
         {/* OVERVIEW MODULE */}
-        <Overview inventory={inventory} currentItem={currentItem} currentStyles={currentStyles} imgUrl={imgUrl} ratings={ratings} />
+        <Overview inventory={inventory}
+                  currentItem={currentItem}
+                  currentStyles={currentStyles}
+                  images={galleryImgs}
+                  ratings={ratings}
+        />
 
       </>
     );

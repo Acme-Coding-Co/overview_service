@@ -1,16 +1,38 @@
 import React from 'react';
 
-const Gallery = ({ imgUrl }) => (
+const Gallery = ({ images }) => (
 
   <div>
-
-    {/* {console.log(this.props)} */}
-    <div className="row" id="gallery" data-toggle="modal" data-target="#photoModal">
-      <div className="col-12">
-        <img className="img-fluid shadow-lg" src={imgUrl} alt="product photo" style={{ 'maxHeight': '550px'}} data-target="#photoCarousel" data-slide-to="0"/>
+    {console.log({images})}
+    {/* CAROUSEL */}
+    <div id="productCarousel" className="carousel slide carousel-fade mb-2" data-ride="carousel">
+      <div className="carousel-inner">
+      {images &&
+        <div className="carousel-item active">
+          <img className="d-block w-100" src={images[0].url} alt="" style={{ 'verticalAlign': 'baseline', 'objectFit': 'cover', 'width': '500', 'height': '500px' }}/>
+        </div>
+      }
+      {images &&
+        images.slice(1).map( image => {
+        return (
+          <div className="carousel-item">
+            <img className="d-block w-100" src={image.url} alt="" style={{ 'verticalAlign': 'baseline', 'objectFit': 'cover', 'width': '500', 'height': '500px' }}/>
+          </div>
+        )
+        })
+      }
       </div>
+      <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
 
+    {/* MODAL VIEW */}
     {/* <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -46,6 +68,23 @@ const Gallery = ({ imgUrl }) => (
         </div>
       </div>
     </div> */}
+
+    {/* THUMBNAIL GALLERY */}
+    <div className="d-flex justify-content-around">
+      {images &&
+          images.slice(1).map( image => {
+            let thumbNail = image.thumbnail_url;
+            return (
+              <div className="mr-2">
+                <a className="thumbnail" href="#">
+                  <img src={thumbNail} alt="" className="img-fluid shadow-lg"
+                  style={{ 'verticalAlign': 'baseline', 'objectFit': 'cover', 'width': '100px', 'height': '50px' }}/>
+                </a>
+              </div>
+            )
+          })
+        }
+    </div>
 
   </div>
 

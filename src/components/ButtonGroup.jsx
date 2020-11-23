@@ -4,8 +4,9 @@ const ButtonGroup = (props) => (
 
   <div>
     <form>
+
+      {/* SIZES*/}
       <div className="form-group">
-        {/* SIZES*/}
         <select className="form-control" id="size">
           <option value="" disabled selected hidden>Size</option>
           <option value="S">S</option>
@@ -15,8 +16,8 @@ const ButtonGroup = (props) => (
         </select>
       </div>
 
+      {/* QTY */}
       <div className="form-group">
-        {/* QTY */}
         <select className="form-control" id="qty">
           <option value="" disabled selected hidden>Qty</option>
           <option value="1">1</option>
