@@ -48,11 +48,8 @@ class App extends React.Component {
           .then(res => {
             return axios.get(`http://52.26.193.201:3000/reviews/${item.id}/meta`)
           })
-          .then(res => {
-            for (let score in res.data.ratings) {
-              console.log(score)
-            }
-          })
+          .then(res => this.setState({ ratings: res.data.ratings })
+          )
       }
     })
   }
