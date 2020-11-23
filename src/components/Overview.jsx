@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Banner, Product, Details, Desc, Gallery, StyleSelect, Rating, ButtonGroup, Sharing } from './index';
+import { Navbar, Banner, Details, Desc, Gallery, StyleSelect, Rating, ButtonGroup, Sharing } from './index';
 
 const Overview = ({ inventory, currentItem, currentStyles, imgUrl, ratings }) => (
 
@@ -18,7 +18,7 @@ const Overview = ({ inventory, currentItem, currentStyles, imgUrl, ratings }) =>
             <Gallery imgUrl={imgUrl} /> :
             <div>nothing here</div>
           }
-          
+
         </div>
 
         {/* TOP-RT COL */}
