@@ -10,10 +10,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {}
+    this.state = {
+      userSession: 84
+    }
 
-    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.handleStyleClick = this.handleStyleClick.bind(this);
+    this.handleAddToBag = this.handleAddToBag.bind(this);
   }
 
   componentDidMount() {
@@ -22,11 +26,19 @@ class App extends React.Component {
       .then(res => {
         return axios.get(`http://52.26.193.201:3000/products/${this.state.currentItem.id}/styles`)
       })
-      .then(res => this.setState({ currentStyles: res.data, galleryImgs: res.data.results[0].photos }))
+      .then(res => this.setState({ styles: res.data, currentStyle: res.data.results[0], galleryImgs: res.data.results[0].photos }))
       .then(res => {
         return axios.get(`http://52.26.193.201:3000/reviews/${this.state.currentItem.id}/meta`)
       })
       .then(res => this.setState({ ratings: res.data.ratings }))
+      .then(res => {
+        return axios.get('http://52.26.193.201:3000/cart/84')
+      })
+      .then(res => this.setState({ cart: res.data }, () => {console.log('cart:', this.state.cart)}))
+  }
+
+  handleChange(e) {
+    this.setState({ search: e.target.value}, function() {console.log(this.state.search)})
   }
 
   handleSearchSubmit() {
@@ -38,7 +50,7 @@ class App extends React.Component {
       if (itemName.includes(query)) {
         this.setState({ currentItem: item })
         axios.get(`http://52.26.193.201:3000/products/${item.id}/styles`)
-          .then(res => this.setState({ currentStyles: res.data, galleryImgs: res.data.results[0].photos }))
+          .then(res => this.setState({ styles: res.data, currentStyle: res.data.results[0], galleryImgs: res.data.results[0].photos }))
           .then(res => {
             return axios.get(`http://52.26.193.201:3000/reviews/${item.id}/meta`)
           })
@@ -48,15 +60,30 @@ class App extends React.Component {
     })
   }
 
-  handleChange(e) {
-    this.setState({ search: e.target.value}, function() {console.log(this.state.search)})
+  handleStyleClick(e) {
+    let query = e.target.id;
+    console.log(query)
+
+    this.state.styles.forEach( style => {
+      if (query === style.results.style_id) {
+        this.setState({ currentStyle: style })
+      }
+    })
+  }
+
+  handleAddToBag(id) {
+    axios.post('http://52.26.193.201:3000/cart/', {
+      "user_session": `${this.state.userSession}`,
+      "product_id": id
+    })
   }
 
   render() {
 
     const inventory = this.state.inventory;
     const currentItem = this.state.currentItem;
-    const currentStyles = this.state.currentStyles;
+    const styles = this.state.styles;
+    const currentStyle = this.state.currentStyle;
     const galleryImgs = this.state.galleryImgs;
     const ratings = this.state.ratings;
 
@@ -73,7 +100,8 @@ class App extends React.Component {
         {/* OVERVIEW MODULE */}
         <Overview inventory={inventory}
                   currentItem={currentItem}
-                  currentStyles={currentStyles}
+                  styles={styles}
+                  currentStyle={currentStyle}
                   images={galleryImgs}
                   ratings={ratings}
         />
