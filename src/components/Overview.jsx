@@ -35,7 +35,9 @@ const Overview = ({ inventory, currentItem, styles, currentStyle, images, rating
 
           {/* PRODUCT DETAILS */}
           {inventory ?
-            <Details item={currentItem} style={currentStyle} /> :
+            <Details
+              item={currentItem}
+              style={currentStyle} /> :
             <div>nothing here</div>
           }
 
@@ -50,7 +52,9 @@ const Overview = ({ inventory, currentItem, styles, currentStyle, images, rating
           </div>
 
           {/* BUTTON GROUP */}
-          <ButtonGroup addToBag={addToBag}/>
+          <ButtonGroup
+            currentStyle={currentStyle}
+            addToBag={addToBag}/>
 
         </div>
 

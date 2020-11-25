@@ -1,18 +1,22 @@
 import React from 'react';
 
-const ButtonGroup = ({ addToBag }) => (
+const ButtonGroup = ({ currentStyle, addToBag }) => (
 
   <div>
+    {console.log(currentStyle)}
     <form>
 
       {/* SIZES*/}
       <div className="form-group">
         <select className="form-control" id="size">
           <option value="" disabled selected hidden>Size</option>
-          <option value="S">S</option>
-          <option value="M">M</option>
-          <option value="L">L</option>
-          <option value="XL">XL</option>
+          {currentStyle &&
+            Object.keys(currentStyle.skus).map(sku => {
+              if (currentStyle.skus[sku] > 0) {
+                return <option value={sku}>{sku}</option>
+              }
+            })
+          }
         </select>
       </div>
 
