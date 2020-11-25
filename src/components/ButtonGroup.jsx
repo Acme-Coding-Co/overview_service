@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ButtonGroup = (props) => (
+const ButtonGroup = ({ addToBag }) => (
 
   <div>
     <form>
@@ -29,7 +29,7 @@ const ButtonGroup = (props) => (
 
       {/* CART/SAVE */}
       <div className="d-flex justify-content-between">
-        <div className="btn btn-warning form-control col-9 shadow-lg" type="submit">Add To Bag</div>
+        <div className="btn btn-warning form-control col-9 shadow-lg" type="submit" onClick={() => addToBag()}>Add To Bag</div>
         <div className="btn btn-warning form-control col-2 shadow-lg">{/* make this conditional depending on whether it's been saved - filled/not filled*/}<i class="far fa-heart"></i></div>
       </div>
 

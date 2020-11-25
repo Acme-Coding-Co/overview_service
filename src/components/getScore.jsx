@@ -17,7 +17,6 @@ const getScore = ({ ratings }) => {
     score = Number((Math.round((total / counter) * 4) / 4).toFixed(2));
   }
 
-  console.log(score);
   return score;
 }
 

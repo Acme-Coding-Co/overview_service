@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      userSession: 84
+      userSession: 83
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -32,7 +32,7 @@ class App extends React.Component {
       })
       .then(res => this.setState({ ratings: res.data.ratings }))
       .then(res => {
-        return axios.get('http://52.26.193.201:3000/cart/84')
+        return axios.get('http://52.26.193.201:3000/cart/83')
       })
       .then(res => this.setState({ cart: res.data }, () => {console.log('cart:', this.state.cart)}))
   }
@@ -71,11 +71,14 @@ class App extends React.Component {
     })
   }
 
-  handleAddToBag(id) {
+  handleAddToBag() {
+    console.log(this.state.userSession, this.state.currentStyle.style_id)
     axios.post('http://52.26.193.201:3000/cart/', {
-      "user_session": `${this.state.userSession}`,
-      "product_id": id
+      user_session: this.state.userSession,
+      product_id: this.state.currentStyle.style_id
     })
+    .then(res => console.log(res))
+
   }
 
   render() {
@@ -104,6 +107,7 @@ class App extends React.Component {
                   currentStyle={currentStyle}
                   images={galleryImgs}
                   ratings={ratings}
+                  addToBag={this.handleAddToBag}
         />
 
       </>

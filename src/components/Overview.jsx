@@ -9,10 +9,10 @@ import {Navbar,
         ButtonGroup,
         Sharing} from './index';
 
-const Overview = ({ inventory, currentItem, styles, currentStyle, images, ratings }) => (
+const Overview = ({ inventory, currentItem, styles, currentStyle, images, ratings, addToBag }) => (
 
   <div>
-  
+
     {/* START OF CONTAINER */}
     <div className="container">
 
@@ -50,7 +50,7 @@ const Overview = ({ inventory, currentItem, styles, currentStyle, images, rating
           </div>
 
           {/* BUTTON GROUP */}
-          <ButtonGroup />
+          <ButtonGroup addToBag={addToBag}/>
 
         </div>
 
