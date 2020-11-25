@@ -3,7 +3,6 @@ import React from 'react';
 const ButtonGroup = ({ currentStyle, addToBag }) => (
 
   <div>
-    {console.log(currentStyle)}
     <form>
 
       {/* SIZES*/}
@@ -11,7 +10,7 @@ const ButtonGroup = ({ currentStyle, addToBag }) => (
         <select className="form-control" id="size">
           <option value="" disabled selected hidden>Size</option>
           {currentStyle &&
-            Object.keys(currentStyle.skus).map(sku => {
+            Object.keys(currentStyle.skus).sort((a, b) => a - b).map(sku => {
               if (currentStyle.skus[sku] > 0) {
                 return <option value={sku}>{sku}</option>
               }
@@ -28,6 +27,7 @@ const ButtonGroup = ({ currentStyle, addToBag }) => (
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
+          <option value="5">5</option>
         </select>
       </div>
 
