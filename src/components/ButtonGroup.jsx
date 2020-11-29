@@ -33,8 +33,8 @@ const ButtonGroup = ({ currentStyle, addToBag }) => (
 
       {/* CART/SAVE */}
       <div className="d-flex justify-content-between">
-        <div className="btn btn-warning form-control col-9 shadow-lg" type="submit" onClick={() => addToBag()}>Add To Bag</div>
-        <div className="btn btn-warning form-control col-2 shadow-lg">{/* make this conditional depending on whether it's been saved - filled/not filled*/}<i class="far fa-heart"></i></div>
+        <div className="btn btn-warning form-control col-9" type="submit" onClick={() => addToBag()}>Add To Bag</div>
+        <div className="btn btn-warning form-control col-2">{/* make this conditional depending on whether it's been saved - filled/not filled*/}<i class="far fa-star"></i></div>
       </div>
 
     </form>

@@ -61,14 +61,7 @@ class App extends React.Component {
   }
 
   handleStyleClick(e) {
-    let query = e.target.id;
-    console.log(query)
-
-    this.state.styles.forEach( style => {
-      if (query === style.results.style_id) {
-        this.setState({ currentStyle: style })
-      }
-    })
+    this.setState({ currentStyle: e })
   }
 
   handleAddToBag() {
